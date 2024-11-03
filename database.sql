@@ -1,0 +1,3 @@
+CREATE DATABASE learn_springboot_rest_api;
+
+USE learn_springboot_rest_api;
