@@ -2,6 +2,7 @@ package com.imansyaefulloh.restapi.service;
 
 import com.imansyaefulloh.restapi.entity.User;
 import com.imansyaefulloh.restapi.model.RegisterUserRequest;
+import com.imansyaefulloh.restapi.model.UserResponse;
 import com.imansyaefulloh.restapi.repository.UserRepository;
 import com.imansyaefulloh.restapi.security.BCrypt;
 import jakarta.transaction.Transactional;
@@ -39,5 +40,12 @@ public class UserService {
         user.setName(request.getName());
 
         userRepository.save(user);
+    }
+
+    public UserResponse get(User user) {
+        return UserResponse.builder()
+                .username(user.getUsername())
+                .name(user.getName())
+                .build();
     }
 }
