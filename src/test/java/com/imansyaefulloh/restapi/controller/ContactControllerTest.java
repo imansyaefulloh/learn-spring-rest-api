@@ -3,6 +3,7 @@ package com.imansyaefulloh.restapi.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imansyaefulloh.restapi.entity.User;
+import com.imansyaefulloh.restapi.model.ContactResponse;
 import com.imansyaefulloh.restapi.model.CreateContactRequest;
 import com.imansyaefulloh.restapi.model.WebResponse;
 import com.imansyaefulloh.restapi.repository.ContactRepository;
@@ -70,6 +71,35 @@ class ContactControllerTest {
             WebResponse<String> response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<WebResponse<String>>() {
             });
             assertNotNull(response.getErrors());
+        });
+    }
+
+    @Test
+    void createContactSuccess() throws Exception {
+        CreateContactRequest request = new CreateContactRequest();
+        request.setFirstName("Eko");
+        request.setLastName("Khannedy");
+        request.setEmail("eko@example.com");
+        request.setPhone("42342342344");
+
+        mockMvc.perform(
+                post("/api/contacts")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                        .header("X-API-TOKEN", "test")
+        ).andExpectAll(
+                status().isOk()
+        ).andDo(result -> {
+            WebResponse<ContactResponse> response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
+            });
+            assertNull(response.getErrors());
+            assertEquals("Eko", response.getData().getFirstName());
+            assertEquals("Khannedy", response.getData().getLastName());
+            assertEquals("eko@example.com", response.getData().getEmail());
+            assertEquals("42342342344", response.getData().getPhone());
+
+            assertTrue(contactRepository.existsById(response.getData().getId()));
         });
     }
 }
