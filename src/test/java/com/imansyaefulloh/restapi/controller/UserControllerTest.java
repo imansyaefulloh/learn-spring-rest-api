@@ -7,6 +7,7 @@ import com.imansyaefulloh.restapi.model.RegisterUserRequest;
 import com.imansyaefulloh.restapi.model.UpdateUserRequest;
 import com.imansyaefulloh.restapi.model.UserResponse;
 import com.imansyaefulloh.restapi.model.WebResponse;
+import com.imansyaefulloh.restapi.repository.ContactRepository;
 import com.imansyaefulloh.restapi.repository.UserRepository;
 import com.imansyaefulloh.restapi.security.BCrypt;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,10 +35,14 @@ class UserControllerTest {
     private UserRepository userRepository;
 
     @Autowired
+    private ContactRepository contactRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
+        contactRepository.deleteAll();
         userRepository.deleteAll();
     }
 
