@@ -3,6 +3,7 @@ package com.imansyaefulloh.restapi.controller;
 import com.imansyaefulloh.restapi.entity.User;
 import com.imansyaefulloh.restapi.model.AddressResponse;
 import com.imansyaefulloh.restapi.model.CreateAddressRequest;
+import com.imansyaefulloh.restapi.model.UpdateAddressRequest;
 import com.imansyaefulloh.restapi.model.WebResponse;
 import com.imansyaefulloh.restapi.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,22 @@ public class AddressController {
                                             @PathVariable("contactId") String contactId,
                                             @PathVariable("addressId") String addressId) {
         AddressResponse addressResponse = addressService.get(user, contactId, addressId);
+        return WebResponse.<AddressResponse>builder().data(addressResponse).build();
+    }
+
+    @PutMapping(
+            path = "/api/contacts/{contactId}/addresses/{addressId}",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<AddressResponse> update(User user,
+                                               @RequestBody UpdateAddressRequest request,
+                                               @PathVariable("contactId") String contactId,
+                                               @PathVariable("addressId") String addressId) {
+        request.setContactId(contactId);
+        request.setAddressId(addressId);
+
+        AddressResponse addressResponse = addressService.update(user, request);
         return WebResponse.<AddressResponse>builder().data(addressResponse).build();
     }
 }
