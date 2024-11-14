@@ -1,0 +1,120 @@
+### Register
+
+POST http://localhost:8181/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username" : "iman",
+  "password" : "secret",
+  "name" : "Iman Syaefulloh"
+}
+
+### Login
+
+POST http://localhost:8181/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "iman",
+  "password": "secret"
+}
+
+### Get User
+GET http://localhost:8181/api/users/current
+Accept: application/json
+X-API-TOKEN: 10207803-e142-4dce-9f03-5fad917e08eb
+
+
+### Update User
+PATCH http://localhost:8181/api/users/current
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: c856ba41-f0f6-4fd6-a2cd-89348f07cd9b
+
+{
+  "name" : "Eko Kurniawan Khannedy"
+}
+
+### Create Contact
+POST http://localhost:8181/api/contacts
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+{
+  "firstName" : "Joko",
+  "lastName" : "Morror",
+  "email" : "joko@example.com",
+  "phone" : "3535325"
+}
+
+### Search Contact
+GET http://localhost:8181/api/contacts
+Accept: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+### Get Contact
+GET http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051
+Accept: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+
+### Update Contact
+PUT http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+{
+  "firstName" : "Budi",
+  "lastName" : "Nugrohoo",
+  "email" : "budi@example.com",
+  "phone" : "23424234234"
+}
+
+### Remove Contact
+DELETE http://localhost:8181/api/contacts/a2875abf-8a31-4b90-972d-1de67dbc1351
+Accept: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+
+### Add Address
+POST http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051/addresses
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+{
+  "street" : "Jalan",
+  "city" : "Jakarta",
+  "province" : "DKI Jakarta",
+  "country" : "Indonesia",
+  "postalCode" : "23423"
+}
+
+### List Addresses
+GET http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051/addresses
+Accept: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+### Update Address
+PUT http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051/addresses/a2d1a4e0-1b63-4709-a5fe-ad3bfcd108c2
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
+
+{
+  "street" : "Jalan Baru Parahyangan",
+  "city" : "Jakarta",
+  "province" : "DKI Jakarta",
+  "country" : "Indonesia",
+  "postalCode" : "23423"
+}
+
+
+### Remove Address
+DELETE http://localhost:8181/api/contacts/faddc830-bf3c-4009-ace8-a8526db51051/addresses/a2d1a4e0-1b63-4709-a5fe-ad3bfcd108c2
+Accept: application/json
+X-API-TOKEN: 2a63aed4-0e52-4d99-bca7-64849c1eea9f
